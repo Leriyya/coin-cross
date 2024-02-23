@@ -16,22 +16,12 @@ export default {
     },
 
     setup() {
-        const onSwiper = (swiper) => {
-            console.log(swiper);
-        };
-
-        const onSlideChange = () => {
-            console.log('slide change');
-        };
-
         return {
-            onSwiper,
-            onSlideChange,
             modules: [Pagination],
             pagination: {
                 clickable: true,
                 renderBullet: function (index, className) {
-                    return '<span class="swiperr__paginatione ' + className + '"> </span>';
+                    return '<span class="slider__paginatione ' + className + '"> </span>';
 
                 }
             }
@@ -42,29 +32,29 @@ export default {
 
 <template>
     <Swiper style="--swiper-pagination-color: #FFBA08" :slides-per-view="1" :space-between="50" @swiper="onSwiper"
-        @slideChange="onSlideChange" class="swiperr" :pagination="pagination">
-        <SwiperSlide class="swiperr__slide">
+        @slideChange="onSlideChange" class="slider" :pagination="pagination">
+        <SwiperSlide class="slider__slide">
             <Card image="src/assets/svg/tg.svg" text="Присоединяйтесь к нашему " text2="Telegram-каналу CoinCross" />
         </SwiperSlide>
-        <SwiperSlide class="swiperr__slide">
+        <SwiperSlide class="slider__slide">
             <Card image="src/assets/svg/review.svg" text="Оставьте свой отзыв на платформе — " text2="выиграй 30 USDT" />
         </SwiperSlide>
-        <SwiperSlide class="swiperr__slide">
+        <SwiperSlide class="slider__slide">
             <Card image="src/assets/svg/advert.svg" text="Рекламируйте свой криптопроект с " text2="Good Marketing" />
         </SwiperSlide>
-        ...
     </Swiper>
 </template>
 
 
 
 <style lang="scss" scoped>
-.swiperr {
+.slider {
     @media (min-width: 1000px) {
         display: none;
     }
 
-    background-color: #f9f8f8;
+    padding-top: 30px;
+    background-color: var(--light-grey);
     overflow-y: visible;
 
 

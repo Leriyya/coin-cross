@@ -15,7 +15,7 @@ import Card from '@/components/CardShare.vue';
 <style lang="scss" scoped>
 .share {
     padding-top: 44px;
-    background-color: #f9f8f8;
+    background-color: var(--light-grey);
 
     @media (max-width: 1000px) {
         display: none;
@@ -24,7 +24,7 @@ import Card from '@/components/CardShare.vue';
     &__container {
         max-width: 1180px;
         margin: 0 auto;
-        padding: 0 2rem;
+        padding: 0 20px;
         display: flex;
         justify-content: space-evenly;
         gap: 48px;

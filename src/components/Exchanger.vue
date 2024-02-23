@@ -1,25 +1,49 @@
 <script>
+import { reactive } from 'vue';
+
+const convertionRatesMock = [
+    {
+        rate: 5.5,
+        sell: {
+            name: 'ETH Ether',
+            img: '@/assets/svg/tickets.svg',
+        },
+        buy: {
+            name: 'DAI Dai',
+            img: '@/assets/svg/tickets1.svg',
+        },
+    }
+]
+
 export default {
-    data() {
+    setup() {
+        const state = reactive({
+            pair: convertionRatesMock[0],
+            inputSellValue: 1,
+            inputBuyValue: convertionRatesMock[0].rate,
+        })
+
+        const calcBuy = (sell) => {
+            if (sell.target.value === "") {
+                state.inputBuyValue = ""
+                return
+            }
+            state.inputBuyValue = sell.target.value * state.pair.rate
+        }
+
+        const calcSell = (buy) => {
+            if (buy.target.value === "") {
+                state.inputSellValue = ""
+                return
+            }
+            state.inputSellValue = buy.target.value / state.pair.rate
+        }
+
         return {
-            isDropdownOpen: false,
-            selectedOption: 'ETH Ether',
-            options: [
-                { id: 1, label: 'Опция 1' },
-                { id: 2, label: 'Опция 2' },
-                { id: 3, label: 'Опция 3' },
-            ],
-            inputValue: '',
+            state,
+            calcBuy,
+            calcSell,
         };
-    },
-    methods: {
-        toggleDropdown() {
-            this.isDropdownOpen = !this.isDropdownOpen;
-        },
-        selectOption(option) {
-            this.selectedOption = option.label;
-            this.isDropdownOpen = false;
-        },
     },
 };
 </script>
@@ -29,28 +53,28 @@ export default {
         <div class="exchanger__container">
             <div class="exchanger__title">Короли на рынке криптообмена</div>
             <div class="exchanger__subTitle">Надежно, быстро, анонимно</div>
-            <div class="exchanger__form">
+            <form class="exchanger__form">
                 <div class="exchanger__formChange">
                     <div class="exchanger__give">
                         <div class="exchanger__name">Вы отдаете</div>
                         <div>
                             <button class="exchanger__dropdownToggle" @click="toggleDropdown">
-                                <div><img src="../assets/svg/tickets.svg" />{{ selectedOption }}</div> <img
-                                    src="../assets/svg/arrow-down.svg" />
+                                <div><img src="@/assets/svg/tickets.svg" />{{ this.state.pair.sell.name }}</div> <img
+                                    src="@/assets/svg/arrow-down.svg" />
                             </button>
-                            <input type="text" v-model="inputValue" class="exchanger__input" placeholder="1" />
+                            <input type="text" v-model="this.state.inputSellValue" class="exchanger__input" placeholder="1" @input="this.calcBuy" />
                         </div>
-
                     </div>
-                    <div class="exchanger__icon"><img src="../assets/svg/change.svg" alt=""></div>
+                    <div class="exchanger__icon"><img src="@/assets/svg/change.svg" alt=""></div>
                     <div class="exchanger__recieve">
                         <div class="exchanger__name">Вы получаете</div>
                         <div>
                             <button class="exchanger__dropdownToggle" @click="toggleDropdown">
-                                <div><img src="../assets/svg/tickets1.svg" />DAI Dai</div> <img
-                                    src="../assets/svg/arrow-down.svg" />
+                                <div><img src="@/assets/svg/tickets1.svg" />{{this.state.pair.buy.name}}</div> <img
+                                    src="@/assets/svg/arrow-down.svg" />
                             </button>
-                            <input type="text" v-model="inputValue" class="exchanger__input" placeholder="2 267,24" />
+                            <input type="text" v-model="this.state.inputBuyValue" class="exchanger__input"
+                                :placeholder="this.state.pair.rate" @input="this.calcSell"/>
                         </div>
 
                     </div>
@@ -59,14 +83,14 @@ export default {
                     <div class="exchanger__formInfo">
                         <div class="exchanger__formCourse">
                             <div>Курс: 1 USDT = 69,06 RUB </div>
-                            <div class="exchanger__logo"><img src="../assets/svg/logo.svg" alt=""></div>
+                            <div class="exchanger__logo"><img src="@/assets/svg/logo.svg" alt=""></div>
                         </div>
                         <div class="exchanger__formSubInfo">
-                            <div class="exchanger__formTime"><img src="../assets/svg/clock.svg" alt="">Время обмена до
+                            <div class="exchanger__formTime"><img src="@/assets/svg/clock.svg" alt="">Время обмена до
                                 60
                                 минут</div>
                             <div class="exchanger__formReserve">
-                                <div class="exchanger__reserve"><img src="../assets/svg/coins.svg" alt="">Резерв 12 324
+                                <div class="exchanger__reserve"><img src="@/assets/svg/coins.svg" alt="">Резерв 12 324
                                     DAI</div>
                                 <button>Не хватает?</button>
                             </div>
@@ -76,7 +100,7 @@ export default {
                         <button>Продолжить</button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </template>
@@ -85,17 +109,18 @@ export default {
 .exchanger {
     padding-top: 64px;
     padding-bottom: 126px;
-    background-color: #f9f8f8;
+    background-color: var(--light-grey);
     background: linear-gradient(to bottom, #f9f8f8 50%, #F0F0F0 50%);
 
     @media (max-width: 700px) {
-        padding-bottom: 60px;
+        margin-top: -56px;
+        padding-bottom: 40px;
     }
 
     &__container {
         max-width: 1180px;
         margin: 0 auto;
-        padding: 0 2rem;
+        padding: 0 20px;
     }
 
     &__reserve {
@@ -132,7 +157,7 @@ export default {
         font-size: 24px;
         font-weight: 400;
         text-align: center;
-        color: #585858;
+        color: var(--dark-grey);
 
         @media (max-width: 1020px) {
             font-size: 16px;
@@ -150,7 +175,7 @@ export default {
     &__form {
         display: flex;
         margin-top: 42px;
-        background-color: white;
+        background-color: var(--white);
         border-radius: 24px;
         padding: 32px;
         flex-direction: column;
@@ -188,14 +213,14 @@ export default {
 
 
     &__name {
-        color: #585858;
+        color: var(--dark-grey);
         font-size: 24px;
         font-weight: 400;
         margin-bottom: 24px;
     }
 
     &__dropdownToggle {
-        background-color: #FFF9F5;
+        background-color: var(--light-orange);
         border: 1px solid #FE7F3226;
         border-radius: 16px;
         padding: 12px 24px;
@@ -220,25 +245,14 @@ export default {
     }
 
     &__input {
-        background-color: #FFF9F5;
+        background-color: var(--light-orange);
         border: 1px solid #FE7F3226;
         border-radius: 16px;
         padding: 12px 24px;
         font-family: 'Poppins', sans-serif;
         font-size: 24px;
-        width: 90%;
+        width: 100%;
 
-        @media (max-width: 1020px) {
-            width: 94%;
-        }
-
-        @media (max-width: 700px) {
-            width: 90%;
-        }
-
-        @media (max-width: 470px) {
-            width: 85%;
-        }
     }
 
     &__formInfo {
@@ -263,7 +277,7 @@ export default {
     &__formCourse {
         font-size: 14px;
         font-weight: 400;
-        color: #585858;
+        color: var(--dark-grey);
         display: flex;
         flex-direction: column;
         gap: 6px;
@@ -311,7 +325,7 @@ export default {
         button {
             background-color: #FE7F32;
             border: none;
-            color: #fff;
+            color: var(--white);
             font-size: 16px;
             padding: 23px 0;
             border-radius: 16px;

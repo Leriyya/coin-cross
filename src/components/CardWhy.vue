@@ -1,9 +1,9 @@
 <template>
-    <div class="cardChoose">
+    <div class="card-choose">
         <img :src="image" alt="Card" class="cardChoose__image" />
-        <div class="cardChoose__content">
-            <div class="cardChoose__title">{{ title }}</div>
-            <div class="cardChoose__text">{{ text }}</div>
+        <div class="card-choose__content">
+            <div class="card-choose__title">{{ title }}</div>
+            <div class="card-choose__text">{{ text }}</div>
         </div>
 
     </div>
@@ -29,16 +29,15 @@ export default {
 </script>
   
 <style lang="scss" scoped>
-.cardChoose {
+.card-choose {
     border-radius: 24px;
     padding: 36px 32px;
     margin-bottom: 16px;
-    background-color: white;
-    width: 30%;
+    background-color: var(--white);
+    width: 100%;
 
     @media (max-width: 1020px) {
         padding: 26px 25px;
-        width: 94%;
     }
 
    
@@ -62,7 +61,7 @@ export default {
 
     &__text {
         font-size: 16px;
-        color: #585858;
+        color: var(--dark-grey);
 
         @media (max-width: 1020px) {
             font-size: 14px;

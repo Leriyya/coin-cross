@@ -1,17 +1,13 @@
-:root {
-  
-}
-
-:root {
-}
-
-
-
 *,
 *::before,
 *::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+  text-decoration: inherit;
 }
 
 body {
   margin: 0;
+  font-family: 'Poppins', sans-serif;
 }

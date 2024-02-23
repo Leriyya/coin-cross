@@ -8,7 +8,7 @@ import CardWhy from './CardWhy.vue';
         <div class="why__container">
             <div class="why__title">Почему выбирают нас?</div>
             <div class="why__cardsContainer">
-                <div class="why__img"><img src="../assets/svg/whywe.svg" alt=""></div>
+                <div class="why__img"><img src="@/assets/svg/whywe.svg" alt=""></div>
                 <div class="why__cards">
                     <CardWhy image="src/assets/svg/crown.svg" title="100% гарантия"
                         text="Наша команда готова решить любые проблемы и ответить на ваши вопросы в чате поддержки" />
@@ -26,7 +26,7 @@ import CardWhy from './CardWhy.vue';
 .why {
     padding-top: 90px;
     padding-bottom: 80px;
-    background-color: #f9f8f8;
+    background-color: var(--light-grey);
 
     @media (max-width: 1020px) {
         padding-top: 10px;
@@ -35,7 +35,7 @@ import CardWhy from './CardWhy.vue';
     &__container {
         max-width: 1180px;
         margin: 0 auto;
-        padding: 0 2rem;
+        padding: 0 20px;
     }
 
     &__cards {

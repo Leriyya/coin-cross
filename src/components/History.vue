@@ -29,7 +29,7 @@ import Transaction from './Transaction.vue';
 .history {
     padding-top: 160px;
     padding-bottom: 40px;
-    background-color: #f9f8f8;
+    background-color: var(--background-grey);
 
     @media (max-width: 1020px) {
         padding-top: 80px;
@@ -38,7 +38,7 @@ import Transaction from './Transaction.vue';
     &__container {
         max-width: 1180px;
         margin: 0 auto;
-        padding: 0 2rem;
+        padding: 0 20px;
     }
 
     &__title {

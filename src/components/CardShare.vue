@@ -31,12 +31,13 @@ export default {
     border: 1px solid #ccc;
     border-radius: 24px;
     border: none;
-    padding: 18px 0 0 16px;
+    padding-top: 18px;
+    padding-left: 16px;
     margin-bottom: 16px;
-    background-color: white;
+    background-color: var(--white);
     display: flex;
     justify-content: space-between;
-    gap: 60px;
+    gap: 35px;
 
     @media (max-width: 1130px) {
         gap: 10px;
@@ -68,17 +69,13 @@ export default {
     }
 
     &__text {
-        font-family: 'Poppins', sans-serif;
         font-size: 16px;
-        color: #16161C
     }
 
     &__subText {
         color: #FE7F32;
-        font-family: 'Poppins', sans-serif;
         font-size: 16px;
         font-style: italic;
-        font-weight: 600;
     }
 }
 </style>

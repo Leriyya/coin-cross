@@ -8,7 +8,7 @@
                     <div class="transaction__coinPrice">{{ coinGivePrice }}</div>
                 </div>
             </div>
-            <div><img src="../assets/svg/change-black.svg" alt=""></div>
+            <div><img src="@/assets/svg/change-black.svg" alt=""></div>
             <div class="transaction__coinContainer">
                 <img :src="imageRecieve" alt="coin" class="transaction__coin" />
                 <div>
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="transaction__time">
-            <div class="transaction__seconds"><img src="../assets/svg/clock.svg" alt="">{{ seconds }}</div>
+            <div class="transaction__seconds"><img src="@/assets/svg/clock.svg" alt="">{{ seconds }}</div>
             <div class="transaction__timeAgo">{{ timeAgo }} назад</div>
         </div>
     </div>
@@ -65,7 +65,7 @@ export default {
   
 <style lang="scss" scoped>
 .transaction {
-    background-color: #FFFFFF;
+    background-color: var(--white);
     padding: 16px 32px;
     border-radius: 24px;
     display: flex;
@@ -76,6 +76,7 @@ export default {
     }
     @media (max-width: 700px) {
         padding: 10px;
+        box-shadow: 0px 4px 20px 0px #4A4A4A12;
     }
 
     &__change {
@@ -116,7 +117,7 @@ export default {
     }
 
     &__coinPrice {
-        color: #585858;
+        color: var(--dark-grey);
         font-size: 14px;
 
         @media (max-width: 700px) {
